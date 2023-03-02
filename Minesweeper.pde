@@ -45,6 +45,8 @@ public void draw ()
 }
 public boolean isWon()
 {
+  
+  
     //your code here
     return false;
 }
@@ -79,7 +81,6 @@ public int countMines(int row, int col)
      for (int j = col -1; j<=col+1; j++){
        if (isValid(i, j) && bombs.contains(buttons[i][j])){
          numMines++; 
-         
        }
      }
    }
@@ -113,11 +114,15 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
-      //if (mouseButton == RIGHT){
-      //  flagged = !flagged;
-      //}
-      //else if (bombs.contains(buttons[r][c]))
-      
+     for (int i = myRow -1; i <= myRow+1; i++){
+       for (int j = myCol -1; j<= myCol+1; j++){
+         if (i!= myRow || j!=myCol){
+           if (isValid(i, j) && buttons[i][j].clicked == false && countMines(i,j) == 0)
+            buttons[i][j].mousePressed(); 
+         }
+       }
+     }
+     
     }
     public void draw () 
     {    
