@@ -31,8 +31,8 @@ public void setMines()
     while (bombs.size() < NUM_BOMBS){
       int r = (int)(Math.random() * NUM_ROWS); 
       int c = (int)(Math.random() * NUM_COLS);
-      bombs.add(buttons[r][c]);
-      System.out.println (r + "," + c); 
+        bombs.add(buttons[r][c]);
+     // System.out.println (r + "," + c); 
     }//end while
     
 }//end set mines
@@ -45,25 +45,30 @@ public void draw ()
 }
 public boolean isWon()
 {
-  
-  
-    //your code here
-    return false;
+    for (int r = 0; r< NUM_ROWS; r++){
+        for(int c=0; c< NUM_COLS; c++){
+            if(buttons[r][c].flagged == false){
+                return false;
+            }
+        }
+    }
+    return true;
+    
 }
 
 public void displayLosingMessage()
 {
-    //your code here
+     textAlign(CENTER); 
+     text("Game Over :(", width/2, height/2);
+     textSize (30); 
+     fill ((int)(Math.random()*256), (int)(Math.random()*256),(int)(Math.random()*256)); 
 }
 
 public void displayWinningMessage()
 {
-   if (isWon()){
-     background(255,255,255,15); 
-     textAlign(CENTER); 
-     text("YOU WIN!!!", width/2, height/2);
-     fill ((int)(Math.random()*256), (int)(Math.random()*256),(int)(Math.random()*256)); 
-   }
+
+    //texts gets 
+   
 }
 
 public boolean isValid(int r, int c)
@@ -114,6 +119,25 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
+        
+        if (keyPressed == true|| mousePressed && mouseButton == RIGHT){
+          if (flagged == true){
+            flagged = false; 
+        }
+          
+        else {
+          flagged = true; 
+          clicked = false; 
+          }
+        }
+        else if (bombs.contains(this)){
+          displayLosingMessage(); 
+        } else if (countMines(myRow,myCol) > 0){
+          myLabel = Integer.toString(countMines(myRow, myCol)); 
+          textSize(23);
+        }
+        else { 
+        
      for (int i = myRow -1; i <= myRow+1; i++){
        for (int j = myCol -1; j<= myCol+1; j++){
          if (i!= myRow || j!=myCol){
@@ -123,6 +147,8 @@ public class MSButton
        }
      }
      
+        
+        }//end big if 
     }
     public void draw () 
     {    
@@ -142,6 +168,7 @@ public class MSButton
     public void setLabel(String newLabel)
     {
         myLabel = newLabel;
+      
     }
     public void setLabel(int newLabel)
     {
