@@ -1,4 +1,5 @@
 import de.bezier.guido.*;
+
 //Declare and initialize constants NUM_ROWS and NUM_COLS = 20
 private MSButton[][] buttons; //2d array of minesweeper buttons
 
@@ -6,7 +7,7 @@ public final static int NUM_ROWS = 10;
 public final static int NUM_COLS = 10; 
 private ArrayList <MSButton> bombs = new ArrayList <MSButton> (); 
 public final static int NUM_BOMBS = 12; 
-
+public boolean lost = false; 
 void setup ()
 {
     size(400, 400);
@@ -58,16 +59,34 @@ public boolean isWon()
 
 public void displayLosingMessage()
 {
-     textAlign(CENTER); 
-     text("Game Over :(", width/2, height/2);
-     textSize (30); 
-     fill ((int)(Math.random()*256), (int)(Math.random()*256),(int)(Math.random()*256)); 
+    for(int i = 0; i < NUM_ROWS; i++){
+      for(int j = 0; j < NUM_COLS; j++){
+        if(bombs.contains(buttons[i][j])){
+          buttons[i][j].clicked = true; 
+        }
+      }
+    }  
+    lost = true; 
+    buttons[NUM_ROWS/2][NUM_COLS/2 - 5].setLabel("G"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 - 4].setLabel("A"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 - 3].setLabel("M"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 - 1].setLabel("E"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2].setLabel("O"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 + 1].setLabel("V"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 + 2].setLabel("E");
+    buttons[NUM_ROWS/2][NUM_COLS/2 + 3].setLabel("R"); 
 }
 
 public void displayWinningMessage()
 {
 
-    //texts gets 
+     buttons[NUM_ROWS/2][NUM_COLS/2 - 5].setLabel("Y"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 - 4].setLabel("O"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 - 3].setLabel("U"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 - 1].setLabel("W"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2].setLabel("I"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 + 1].setLabel("N"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 + 2].setLabel("!");
    
 }
 
@@ -118,7 +137,10 @@ public class MSButton
     // called by manager
     public void mousePressed () 
     {
-        clicked = true;
+        if (lost == true){
+          return
+        }
+      clicked = true;
         
         if (keyPressed == true|| mousePressed && mouseButton == RIGHT){
           if (flagged == true){
