@@ -70,7 +70,7 @@ public void displayLosingMessage()
     buttons[NUM_ROWS/2][NUM_COLS/2 - 5].setLabel("G"); 
     buttons[NUM_ROWS/2][NUM_COLS/2 - 4].setLabel("A"); 
     buttons[NUM_ROWS/2][NUM_COLS/2 - 3].setLabel("M"); 
-    buttons[NUM_ROWS/2][NUM_COLS/2 - 1].setLabel("E"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 - 2].setLabel("E"); 
     buttons[NUM_ROWS/2][NUM_COLS/2].setLabel("O"); 
     buttons[NUM_ROWS/2][NUM_COLS/2 + 1].setLabel("V"); 
     buttons[NUM_ROWS/2][NUM_COLS/2 + 2].setLabel("E");
