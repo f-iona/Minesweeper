@@ -156,7 +156,7 @@ public class MSButton
           displayLosingMessage(); 
         } else if (countMines(myRow,myCol) > 0){
           myLabel = Integer.toString(countMines(myRow, myCol)); 
-          textSize(23);
+     //textSize(23);
         }
         else { 
         
