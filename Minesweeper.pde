@@ -155,7 +155,7 @@ public class MSButton
         else if (bombs.contains(this)){
           displayLosingMessage(); 
         } else if (countMines(myRow,myCol) > 0){
-          myLabel = "" + countMines(myRow,myCol);
+        setLabel(countMines(myRow, myCol)); 
      //textSize(23);
         }
         else { 
