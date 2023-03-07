@@ -40,7 +40,7 @@ public void setMines()
 
 public void draw ()
 {
-    background( 0 );
+   // background( 0 );
     if(isWon() == true)
         displayWinningMessage();
 }
@@ -71,10 +71,10 @@ public void displayLosingMessage()
     buttons[NUM_ROWS/2][NUM_COLS/2 - 4].setLabel("A"); 
     buttons[NUM_ROWS/2][NUM_COLS/2 - 3].setLabel("M"); 
     buttons[NUM_ROWS/2][NUM_COLS/2 - 2].setLabel("E"); 
-    buttons[NUM_ROWS/2][NUM_COLS/2].setLabel("O"); 
-    buttons[NUM_ROWS/2][NUM_COLS/2 + 1].setLabel("V"); 
-    buttons[NUM_ROWS/2][NUM_COLS/2 + 2].setLabel("E");
-    buttons[NUM_ROWS/2][NUM_COLS/2 + 3].setLabel("R"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 + 1].setLabel("O"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 + 2].setLabel("V"); 
+    buttons[NUM_ROWS/2][NUM_COLS/2 + 3].setLabel("E");
+    buttons[NUM_ROWS/2][NUM_COLS/2 + 4].setLabel("R"); 
 }
 
 public void displayWinningMessage()
@@ -138,8 +138,11 @@ public class MSButton
       public void mousePressed () 
     {
         clicked = true;
+        if (lost == true){
+        return; 
+        }
         
-        if (keyPressed == true|| mousePressed && mouseButton == RIGHT){
+        if (mouseButton == RIGHT){
           if (flagged == true){
             flagged = false; 
         }
@@ -160,7 +163,7 @@ public class MSButton
      for (int i = myRow -1; i <= myRow+1; i++){
        for (int j = myCol -1; j<= myCol+1; j++){
          if (i!= myRow || j!=myCol){
-           if (isValid(i, j) && buttons[i][j].clicked == false && countMines(i,j) == 0)
+           if (isValid(i, j) && buttons[i][j].clicked == false)
             buttons[i][j].mousePressed(); 
          }
        }
