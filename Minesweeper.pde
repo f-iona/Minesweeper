@@ -172,7 +172,7 @@ public class MSButton
     public void draw () 
     {    
         if (flagged)
-            fill(0);
+            fill(113, 50, 168);
         else if(clicked && bombs.contains(this) ) 
             fill(255,0,0);
         else if(clicked)
