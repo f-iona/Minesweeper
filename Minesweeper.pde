@@ -135,33 +135,39 @@ public class MSButton
     }
 
     // called by manager
-    public void mousePressed () 
+      public void mousePressed () 
     {
-        if (lost == true){
-          return
-        }
-      clicked = true;
-     if(mouseButton == RIGHT) {
-          flagged = !flagged;
-          if(flagged == false)
-            clicked = false;
-        } else if  (mines.contains( this )) {
-          displayLosingMessage();
-        } else if (countMines(myRow, myCol) > 0) {
-          setLabel(countMines(myRow, myCol));
-        } else { 
-
+        clicked = true;
         
-        for(int r = myRow-1; r <= myRow+1; r++) {
-          for(int c = myCol-1; c <= myCol+1; c++) {
-            if(isValid(r, c) && buttons[r][c].clicked == false) {
-              if(r != myRow || c != myCol) {
-                buttons[r][c].mousePressed();
-              }
-            }
+        if (keyPressed == true|| mousePressed && mouseButton == RIGHT){
+          if (flagged == true){
+            flagged = false; 
+        }
+          
+        else {
+          flagged = true; 
+          clicked = false; 
           }
-        }  
-      }
+        }
+        else if (bombs.contains(this)){
+          displayLosingMessage(); 
+        } else if (countMines(myRow,myCol) > 0){
+               setLabel(countMines(myRow, myCol));
+        //  textSize(23);
+        }
+        else { 
+        
+     for (int i = myRow -1; i <= myRow+1; i++){
+       for (int j = myCol -1; j<= myCol+1; j++){
+         if (i!= myRow || j!=myCol){
+           if (isValid(i, j) && buttons[i][j].clicked == false && countMines(i,j) == 0)
+            buttons[i][j].mousePressed(); 
+         }
+       }
+     }
+     
+        
+        }//end big if 
     }
     public void draw () 
     {    
